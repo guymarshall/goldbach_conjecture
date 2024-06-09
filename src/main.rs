@@ -66,7 +66,7 @@ fn main() {
     println!("Checking sums of primes...");
     (4..LIMIT).step_by(2).for_each(|number_to_check: i32| {
         if number_to_check % 1000 == 0 {
-            println!("{}%", number_to_check as f64 / LIMIT as f64);
+            println!("{:.4}%", (number_to_check as f64 / LIMIT as f64) * 100.0);
         }
         if !primes_add_up_to_number(primes, number_to_check) {
             println!("No two primes add to make {number_to_check}");
