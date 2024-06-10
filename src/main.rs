@@ -1,4 +1,5 @@
 use std::process::exit;
+use std::time::Instant;
 
 const COUNT: i32 = 1_000_000;
 
@@ -58,6 +59,8 @@ fn primes_add_up_to_number(primes: [i32; COUNT as usize], number_to_check: i32) 
 }
 
 fn main() {
+    let start_time: Instant = Instant::now();
+
     const LIMIT: i32 = COUNT * 1000;
 
     println!("Generating primes upto {COUNT}...");
@@ -73,4 +76,8 @@ fn main() {
             exit(0);
         }
     });
+    
+    let end_time: Instant = Instant::now();
+
+    println!("Elapsed time: {:?}", end_time - start_time);
 }
