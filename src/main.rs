@@ -50,11 +50,9 @@ fn generate_primes() -> [i32; COUNT as usize] {
     primes
 }
 
-fn primes_add_up_to_number(primes: [i32; COUNT as usize], number_to_check: i32) -> bool {
-    primes.iter().any(|first_prime: &i32| {
-        primes.iter().any(|second_prime: &i32| {
-            first_prime + second_prime == number_to_check
-        })
+fn primes_add_up_to_number(primes: &[i32], number_to_check: i32) -> bool {
+    primes.iter().any(|prime: &i32| {
+        primes.contains(&(number_to_check - prime))
     })
 }
 
@@ -71,12 +69,12 @@ fn main() {
         if number_to_check % 1000 == 0 {
             println!("{:.4}%", (number_to_check as f64 / LIMIT as f64) * 100.0);
         }
-        if !primes_add_up_to_number(primes, number_to_check) {
+        if !primes_add_up_to_number(&primes, number_to_check) {
             println!("No two primes add to make {number_to_check}");
             exit(0);
         }
     });
-    
+
     let end_time: Instant = Instant::now();
 
     println!("Elapsed time: {:?}", end_time - start_time);
