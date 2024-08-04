@@ -1,3 +1,4 @@
+use rayon::prelude::*;
 use std::{process::exit, time::Instant};
 
 fn is_prime(number: usize) -> bool {
@@ -38,6 +39,7 @@ fn main() {
     (4..)
         .step_by(2)
         .take((LIMIT - 4) / 2)
+        .par_bridge()
         .for_each(|number_to_check: usize| {
             if number_to_check % 10000 == 0 {
                 println!("{:.4}", (number_to_check as f64 / LIMIT as f64) * 100.0);
