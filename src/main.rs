@@ -42,7 +42,7 @@ fn main() {
         .par_bridge()
         .for_each(|number_to_check: usize| {
             if number_to_check % 10000 == 0 {
-                println!("{:.4}", (number_to_check as f64 / LIMIT as f64) * 100.0);
+                println!("{:.4}%", (number_to_check as f64 / LIMIT as f64) * 100.0);
             }
             if !primes_add_up_to_number(number_to_check) {
                 println!("No two primes add to make {number_to_check}");
