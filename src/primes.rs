@@ -1,19 +1,22 @@
 fn is_prime(number: usize) -> bool {
-    if number <= 1 {
-        return false;
-    }
-    if number == 2 {
+    if number == 2 || number == 3 {
         return true;
     }
-    if number % 2 == 0 {
+
+    if number <= 1 || number % 2 == 0 || number % 3 == 0 {
         return false;
     }
 
-    let ceiling_root: usize = (number as f64).sqrt().ceil() as usize;
+    for i in (5..).step_by(6) {
+        if i * i > number {
+            break;
+        }
+        if number % i == 0 || number % (i + 2) == 0 {
+            return false;
+        }
+    }
 
-    (3..=ceiling_root)
-        .step_by(2)
-        .all(|i: usize| number % i != 0)
+    true
 }
 
 pub(crate) fn primes_add_up_to_number(number_to_check: usize) -> bool {
